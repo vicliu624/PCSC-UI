@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B3F48C32154D61600345481 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3F48C22154D61600345481 /* GTMBase64.m */; };
+		8B518F2621538E63007F5413 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B518F2521538E63007F5413 /* Tools.m */; };
 		8BFBD0512152271F00F64589 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFBD0502152271F00F64589 /* AppDelegate.m */; };
 		8BFBD0542152271F00F64589 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFBD0532152271F00F64589 /* ViewController.m */; };
 		8BFBD0562152272000F64589 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BFBD0552152272000F64589 /* Assets.xcassets */; };
@@ -14,6 +16,7 @@
 		8BFBD05C2152272000F64589 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFBD05B2152272000F64589 /* main.m */; };
 		8BFBD0672152272000F64589 /* PCSC_UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFBD0662152272000F64589 /* PCSC_UITests.m */; };
 		8BFBD0722152272000F64589 /* PCSC_UIUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFBD0712152272000F64589 /* PCSC_UIUITests.m */; };
+		8BFBD081215227A400F64589 /* PCSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BFBD080215227A400F64589 /* PCSC.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +37,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8B3F48BF2154D5BD00345481 /* GTMBase64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
+		8B3F48C22154D61600345481 /* GTMBase64.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
+		8B3F48C42154D64A00345481 /* GTMDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		8B518F2421538E63007F5413 /* Tools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
+		8B518F2521538E63007F5413 /* Tools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
+		8B518F272154AB38007F5413 /* libcommonCrypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcommonCrypto.tbd; path = usr/lib/system/libcommonCrypto.tbd; sourceTree = SDKROOT; };
 		8BFBD04C2152271F00F64589 /* PCSC-UI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PCSC-UI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BFBD04F2152271F00F64589 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8BFBD0502152271F00F64589 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -50,6 +59,9 @@
 		8BFBD06D2152272000F64589 /* PCSC-UIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PCSC-UIUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BFBD0712152272000F64589 /* PCSC_UIUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PCSC_UIUITests.m; sourceTree = "<group>"; };
 		8BFBD0732152272000F64589 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8BFBD080215227A400F64589 /* PCSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PCSC.framework; path = System/Library/Frameworks/PCSC.framework; sourceTree = SDKROOT; };
+		8BFBD08521522C7E00F64589 /* stdAfx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stdAfx.h; sourceTree = "<group>"; };
+		8BFBD08921524F4F00F64589 /* PCSC-UI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PCSC-UI.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BFBD081215227A400F64589 /* PCSC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +90,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B3F48BE2154D57300345481 /* GTMBase64 */ = {
+			isa = PBXGroup;
+			children = (
+				8B3F48BF2154D5BD00345481 /* GTMBase64.h */,
+				8B3F48C22154D61600345481 /* GTMBase64.m */,
+				8B3F48C42154D64A00345481 /* GTMDefines.h */,
+			);
+			name = GTMBase64;
+			sourceTree = "<group>";
+		};
 		8BFBD0432152271F00F64589 = {
 			isa = PBXGroup;
 			children = (
@@ -84,6 +107,7 @@
 				8BFBD0652152272000F64589 /* PCSC-UITests */,
 				8BFBD0702152272000F64589 /* PCSC-UIUITests */,
 				8BFBD04D2152271F00F64589 /* Products */,
+				8BFBD07F215227A400F64589 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -100,6 +124,8 @@
 		8BFBD04E2152271F00F64589 /* PCSC-UI */ = {
 			isa = PBXGroup;
 			children = (
+				8B3F48BE2154D57300345481 /* GTMBase64 */,
+				8BFBD08921524F4F00F64589 /* PCSC-UI.entitlements */,
 				8BFBD04F2152271F00F64589 /* AppDelegate.h */,
 				8BFBD0502152271F00F64589 /* AppDelegate.m */,
 				8BFBD0522152271F00F64589 /* ViewController.h */,
@@ -109,6 +135,9 @@
 				8BFBD05A2152272000F64589 /* Info.plist */,
 				8BFBD05B2152272000F64589 /* main.m */,
 				8BFBD05D2152272000F64589 /* PCSC_UI.entitlements */,
+				8BFBD08521522C7E00F64589 /* stdAfx.h */,
+				8B518F2421538E63007F5413 /* Tools.h */,
+				8B518F2521538E63007F5413 /* Tools.m */,
 			);
 			path = "PCSC-UI";
 			sourceTree = "<group>";
@@ -129,6 +158,15 @@
 				8BFBD0732152272000F64589 /* Info.plist */,
 			);
 			path = "PCSC-UIUITests";
+			sourceTree = "<group>";
+		};
+		8BFBD07F215227A400F64589 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8B518F272154AB38007F5413 /* libcommonCrypto.tbd */,
+				8BFBD080215227A400F64589 /* PCSC.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,6 +236,17 @@
 				TargetAttributes = {
 					8BFBD04B2152271F00F64589 = {
 						CreatedOnToolsVersion = 9.4.1;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.Mac = {
+								enabled = 0;
+							};
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
 					};
 					8BFBD0612152272000F64589 = {
 						CreatedOnToolsVersion = 9.4.1;
@@ -262,7 +311,9 @@
 			files = (
 				8BFBD0542152271F00F64589 /* ViewController.m in Sources */,
 				8BFBD05C2152272000F64589 /* main.m in Sources */,
+				8B3F48C32154D61600345481 /* GTMBase64.m in Sources */,
 				8BFBD0512152271F00F64589 /* AppDelegate.m in Sources */,
+				8B518F2621538E63007F5413 /* Tools.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,14 +473,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "PCSC-UI/PCSC_UI.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "PCSC-UI/PCSC-UI.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = AF2BN8Q9FX;
+				GCC_INPUT_FILETYPE = automatic;
 				INFOPLIST_FILE = "PCSC-UI/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "liuweikai.PCSC-UI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -440,14 +496,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "PCSC-UI/PCSC_UI.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "PCSC-UI/PCSC-UI.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = AF2BN8Q9FX;
+				GCC_INPUT_FILETYPE = automatic;
 				INFOPLIST_FILE = "PCSC-UI/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "liuweikai.PCSC-UI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
