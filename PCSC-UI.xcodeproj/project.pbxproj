@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8B3F48C32154D61600345481 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3F48C22154D61600345481 /* GTMBase64.m */; };
 		8B518F2621538E63007F5413 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B518F2521538E63007F5413 /* Tools.m */; };
 		8BFBD0512152271F00F64589 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFBD0502152271F00F64589 /* AppDelegate.m */; };
 		8BFBD0542152271F00F64589 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFBD0532152271F00F64589 /* ViewController.m */; };
@@ -37,9 +36,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8B3F48BF2154D5BD00345481 /* GTMBase64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
-		8B3F48C22154D61600345481 /* GTMBase64.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
-		8B3F48C42154D64A00345481 /* GTMDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		8B518F2421538E63007F5413 /* Tools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		8B518F2521538E63007F5413 /* Tools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
 		8B518F272154AB38007F5413 /* libcommonCrypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcommonCrypto.tbd; path = usr/lib/system/libcommonCrypto.tbd; sourceTree = SDKROOT; };
@@ -90,16 +86,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8B3F48BE2154D57300345481 /* GTMBase64 */ = {
-			isa = PBXGroup;
-			children = (
-				8B3F48BF2154D5BD00345481 /* GTMBase64.h */,
-				8B3F48C22154D61600345481 /* GTMBase64.m */,
-				8B3F48C42154D64A00345481 /* GTMDefines.h */,
-			);
-			name = GTMBase64;
-			sourceTree = "<group>";
-		};
 		8BFBD0432152271F00F64589 = {
 			isa = PBXGroup;
 			children = (
@@ -124,7 +110,6 @@
 		8BFBD04E2152271F00F64589 /* PCSC-UI */ = {
 			isa = PBXGroup;
 			children = (
-				8B3F48BE2154D57300345481 /* GTMBase64 */,
 				8BFBD08921524F4F00F64589 /* PCSC-UI.entitlements */,
 				8BFBD04F2152271F00F64589 /* AppDelegate.h */,
 				8BFBD0502152271F00F64589 /* AppDelegate.m */,
@@ -311,7 +296,6 @@
 			files = (
 				8BFBD0542152271F00F64589 /* ViewController.m in Sources */,
 				8BFBD05C2152272000F64589 /* main.m in Sources */,
-				8B3F48C32154D61600345481 /* GTMBase64.m in Sources */,
 				8BFBD0512152271F00F64589 /* AppDelegate.m in Sources */,
 				8B518F2621538E63007F5413 /* Tools.m in Sources */,
 			);

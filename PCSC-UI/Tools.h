@@ -20,7 +20,6 @@
  * DES方式实用
  */
 + (NSString *) encryptUseDES:(NSString *)clearText key:(NSString *)key;//加密
-+ (NSString *) decryptUseDES:(NSString *)plainText key:(NSString *)key;//解密
 
 /*
  * 3DES方式

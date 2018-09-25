@@ -10,7 +10,6 @@
 #import <CommonCrypto/CommonCryptor.h>
 #import <CommonCrypto/CommonDigest.h>
 #import "PCSC/winscard.h"
-#import "GTMBase64.h"
 
 @implementation Tools
 
@@ -115,44 +114,6 @@
     return ciphertext;
 }
 
-//解密
-+(NSString *) decryptUseDES:(NSString *)plainText key:(NSString *)key
-{
-    NSString *cleartext ;
-    NSData *textData = [self stringToByte:plainText];
-    NSUInteger dataLength = [textData length];
-    NSUInteger bufferSize=([textData length] + kCCKeySizeDES) & ~(kCCKeySizeDES -1);
-    
-    unsigned char buffer[bufferSize];
-    memset(buffer, 0, sizeof(char));
-    size_t numBytesEncrypted ;
-    const void *iv = (const void *) [key UTF8String];
-    
-    CCCryptorStatus cryptStatus = CCCrypt(kCCDecrypt,
-                                          kCCAlgorithmDES,
-                                          kCCOptionPKCS7Padding ,
-                                          [key UTF8String],
-                                          kCCKeySizeDES,
-                                          iv,
-                                          [textData bytes]  ,
-                                          dataLength,
-                                          buffer,
-                                          bufferSize,
-                                          &numBytesEncrypted);
-    
-    if (cryptStatus == kCCSuccess) {
-        NSLog(@"DES解密成功");
-        NSData *data = [NSData dataWithBytes:buffer length:numBytesEncrypted];
-        cleartext = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-    }else{
-        NSLog(@"DES解密失败");
-    }
-    
-    // free(buffer);
-    return cleartext;
-    
-}
-
 + (NSString*)TripleDES:(NSString*)plainText key:(NSString *)key encryptOrDecrypt:(CCOperation)encryptOrDecrypt
 {
     
@@ -160,9 +121,8 @@
     size_t plainTextBufferSize;
     if (encryptOrDecrypt == kCCDecrypt)//解密
     {
-        NSData *EncryptData = [GTMBase64 decodeData:[plainText dataUsingEncoding:NSUTF8StringEncoding]];
-        plainTextBufferSize = [EncryptData length];
-        vplainText = [EncryptData bytes];
+        // 未实现
+        return nil;
     }
     else //加密
     {
@@ -208,9 +168,7 @@
     
     if (encryptOrDecrypt == kCCDecrypt)
     {
-        ciphertext = [[NSString alloc] initWithData:[NSData dataWithBytes:(const void *)bufferPtr
-                                                               length:(NSUInteger)movedBytes]
-                                       encoding:NSUTF8StringEncoding];
+        // 未实现
     }
     else
     {
