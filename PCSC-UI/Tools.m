@@ -105,7 +105,6 @@
         NSLog(@"DES加密成功");
         NSData *d = [NSData dataWithBytes:buffer length:(NSUInteger)numBytesEncrypted];
         ciphertext = [self ByteToString:[d bytes]];
-        
     }else{
         NSLog(@"DES加密失败");
     }
@@ -177,6 +176,66 @@
     }
     
     return ciphertext;
+}
+
++ (NSString*)PBOC_DES_MAC:(NSString*)key data:(NSString *)data
+{
+    unsigned char I0[8];
+    memset(I0, 0, 8);
+    int TLen = 0;
+    int DBz = 0;
+    if (data.length % 16 != 0 || data.length % 16 == 0){
+        TLen = (((int)(data.length / 16)) + 1) * 16;
+        DBz = (int)(data.length / 16) + 1;
+        data = [data stringByAppendingString:@"8"];
+        TLen = (int)TLen - (int)data.length;
+        for (int i = 0; i < TLen; i++){
+            data = [data stringByAppendingString:@"0"];
+        }
+    }
+    NSData *mData = [self stringToByte:data];
+    unsigned char *fillData = [mData bytes];
+    NSLog(@"加密数据:%@\n",[self ByteToString:fillData andDataLen:[mData length]]);
+    unsigned char D1[8];
+    unsigned char D2[8];
+    unsigned char I2[8];
+    unsigned char I3[8];
+    unsigned char bytTemp[8];
+    unsigned char bytTempX[8];
+    if (DBz >= 1){
+        for (int i = 0; i < 8; i++){
+            D1[i] = fillData[i];
+        }
+        for (int i = 0; i < 8; i++){
+            bytTemp[i] = (unsigned char)(I0[i] ^ D1[i]);
+        }
+        memcpy(I2, bytTemp, 8);
+        NSLog(@"I2:%@\n",[self ByteToString:I2 andDataLen:8]);
+        NSString *enRet = [self encryptUseDES:[self ByteToString:I2 andDataLen:8] key:key];
+        memcpy(bytTempX, [[self stringToByte:enRet] bytes], 8);
+        NSLog(@"bytTempX:%@\n",[self ByteToString:bytTempX andDataLen:8]);
+    }
+    memset(bytTemp, 0, 8);
+    if (DBz >= 2){
+        for (int j = 2; j <= DBz; j++){
+            for (int i = (j - 1) * 8; i < j * 8; i++)
+            {
+                D2[i - (j - 1) * 8] = fillData[i];
+            }
+            for (int i = 0; i < 8; i++)
+            {
+                bytTemp[i] =  (unsigned char)(bytTempX[i] ^ D2[i]);
+                
+            }
+            memcpy(I3, bytTemp, 8);
+            NSLog(@"I3:%@\n",[self ByteToString:I3 andDataLen:8]);
+            NSString *enRet = [self encryptUseDES:[self ByteToString:I3 andDataLen:8] key:key];
+            memcpy(bytTempX, [[self stringToByte:enRet] bytes], 8);
+            NSLog(@"bytTempX:%@\n",[self ByteToString:bytTempX andDataLen:8]);
+        }
+        return [self ByteToString:bytTempX andDataLen:8];
+    }
+    return nil;
 }
 
 @end

@@ -25,4 +25,9 @@
  * 3DES方式
  */
 + (NSString*)TripleDES:(NSString*)plainText key:(NSString *)key encryptOrDecrypt:(CCOperation)encryptOrDecrypt;
+
+/*
+ * 计算过程密钥
+ */
++ (NSString*)PBOC_DES_MAC:(NSString*)key data:(NSString *)data;
 @end

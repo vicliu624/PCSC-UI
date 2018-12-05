@@ -33,6 +33,13 @@
     NSString *authType;
     IBOutlet NSTextField *textClearCardCmd;
     IBOutlet NSTextField *textClearCardResult;
+    IBOutlet NSTextField *textCreateMFKeyFileCmd;
+    IBOutlet NSTextField *textCreateMFKeyFileResult;
+    IBOutlet NSTextField *textSendCmd;
+    IBOutlet NSTextField *textRecvData;
+    
+    IBOutlet NSTextField *textQuancunInitCmd;
+    IBOutlet NSTextField *textWriteCardCmd;
 }
 - (NSString*) sendCmdAndRecvData:(NSString*)cmd;
 @end

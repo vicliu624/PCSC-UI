@@ -28,6 +28,11 @@
     authType = @"DES";
     textClearCardCmd.stringValue = @"";
     textClearCardResult.stringValue = @"";
+    textCreateMFKeyFileCmd.stringValue = @"";
+    textCreateMFKeyFileResult.stringValue = @"";
+    
+    textRecvData.stringValue = @"";
+    textWriteCardCmd.stringValue = @"";
 }
 
 
@@ -121,8 +126,6 @@
     textSendRandomCmd.stringValue = [@"send:" stringByAppendingString:cmd];
     currentRandom = [self sendCmdAndRecvData:cmd];
     if(currentRandom == nil){
-        [alert setMessageText:@"指令结果出错!"];
-        [alert runModal];
         return;
     }
     
@@ -161,11 +164,16 @@
         textCryptRandom.stringValue = [Tools TripleDES:currentRandom key:textAuthCode.stringValue encryptOrDecrypt:kCCEncrypt];
     }
     textSendAuth.stringValue = [@"send:0082000008" stringByAppendingString:textCryptRandom.stringValue];
+    
+    
 }
 
 - (IBAction)sendAuthCmd:(id)sender {
     NSString *sendCmd = [@"0082000008" stringByAppendingString:textCryptRandom.stringValue];
     NSString *recvData = [self sendCmdAndRecvData:sendCmd];
+    if(recvData == nil){
+        return;
+    }
     textRecvAuth.stringValue = [@"recv:" stringByAppendingString:recvData];
 }
 
@@ -184,7 +192,91 @@
     NSString *sendCmd = @"800E000000";
     textClearCardCmd.stringValue = [@"send:" stringByAppendingString:sendCmd];
     NSString *recvData = [self sendCmdAndRecvData:sendCmd];
+    if(recvData == nil){
+        return;
+    }
     textClearCardResult.stringValue = [@"recv:" stringByAppendingString:recvData];
+}
+- (IBAction)createMFKey:(id)sender {
+    NSString *sendCmd = @"80E00000073F004001F0FFFF";
+    textCreateMFKeyFileCmd.stringValue = [@"send:" stringByAppendingString:sendCmd];
+    NSString *recvData = [self sendCmdAndRecvData:sendCmd];
+    if(recvData == nil){
+        return;
+    }
+    textCreateMFKeyFileResult.stringValue = [@"recv:" stringByAppendingString:recvData];
+}
+- (IBAction)executeCmd:(id)sender {
+    NSString *sendCmd = textSendCmd.stringValue;
+    
+    NSString *recvData = [self sendCmdAndRecvData:sendCmd];
+    if(recvData == nil){
+        return;
+    }
+    textRecvData.stringValue = [@"recv:" stringByAppendingString:recvData];
+}
+- (IBAction)createWriteCardCmd:(id)sender {
+    NSString *initQuancunRecv = textQuancunInitCmd.stringValue;
+    //卡内余额
+    NSString *balenceAmt = [initQuancunRecv substringWithRange:NSMakeRange(0, 8)];
+    //联机交易序号
+    NSString *txSeq = [initQuancunRecv substringWithRange:NSMakeRange(8, 4)];
+    //密钥版本号
+    NSString *keyIndex = [initQuancunRecv substringWithRange:NSMakeRange(12, 2)];
+    //算法标示
+    NSString *calcFlag = [initQuancunRecv substringWithRange:NSMakeRange(14, 2)];
+    //伪随机数
+    NSString *random = [initQuancunRecv substringWithRange:NSMakeRange(16, 8)];
+    //NSString *random = @"3948BC11";
+    //MAC1
+    NSString *mac1 = [initQuancunRecv substringWithRange:NSMakeRange(24, 8)];
+    NSLog(@"\n圈存初始化返回:%@\n卡内余额:%@\n联机交易序号:%@\n密钥版本号:%@\n算法标示:%@\n伪随机数:%@\nMAC1:%@\n", initQuancunRecv,balenceAmt,txSeq,keyIndex,calcFlag,random,mac1);
+    
+    NSString *quancunKey1 = @"39333933393339333933393339333933";
+    //NSString *quancunKey1 = @"00112233445566778899AABBCCDDEEFF";
+    NSString *quancunKey2 = @"39343934393439343934393439343934";
+    NSString *quancunKeyReal = @"";
+    NSString *checkMAC1Key = @"";
+    if([keyIndex isEqualToString:@"00" ] == YES){
+        quancunKeyReal = quancunKey1;
+    }else if([keyIndex isEqualToString:@"01" ] == YES){
+        quancunKeyReal = quancunKey2;
+    }else{
+        [alert setMessageText:@"未知的密钥版本号!"];
+        [alert runModal];
+        return;
+    }
+    
+    //校验MAC1
+    NSString *inputData = [random stringByAppendingString:txSeq];
+    inputData = [inputData stringByAppendingString:@"8000"];//填充inputData的长度为8的倍数并以x80为结束符
+    
+    if([calcFlag isEqualToString:@"00" ] == YES){
+        NSLog(@"DES算法");
+    }else if([calcFlag isEqualToString:@"01" ] == YES){
+        NSLog(@"3DES算法");
+        quancunKeyReal = [quancunKeyReal stringByAppendingString:[quancunKeyReal substringWithRange:NSMakeRange(0, 16)]];
+        NSLog(@"扩展后的Key1%@\n",quancunKeyReal);
+        //过程密钥
+        checkMAC1Key = [Tools TripleDES:inputData key:quancunKeyReal encryptOrDecrypt:kCCEncrypt];
+    }else{
+        [alert setMessageText:@"未知的算法标识!"];
+        [alert runModal];
+        return;
+    }
+    
+    NSLog(@"过程密钥:%@\n",checkMAC1Key);
+    
+    NSString *nsData = @"000000010000000102000000000001";
+    NSString *ret = [Tools PBOC_DES_MAC:checkMAC1Key data:nsData];
+    NSLog(@"计算得到的MAC1:%@\n",ret);
+    
+    
+    if([quancunKeyReal isEqualToString:mac1] != YES){
+        [alert setMessageText:@"MAC1校验失败!"];
+        [alert runModal];
+        return;
+    }
 }
 
 - (NSString*) sendCmdAndRecvData:(NSString*)cmd
